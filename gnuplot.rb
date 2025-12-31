@@ -53,9 +53,9 @@ class Gnuplot < Formula
       --with-readline=#{Formula["readline"].opt_prefix}
       --disable-wxwidgets
       --with-qt
-      --without-x
       --without-latex
     ]
+# --without-x
 
     ENV.append "CXXFLAGS", "-std=c++17" # needed for Qt 6
     system "./prepare" if build.head?
