@@ -1,9 +1,10 @@
 class Gnuplot < Formula
   desc "Command-driven, interactive function plotting"
   homepage "http://www.gnuplot.info/"
-  url "https://downloads.sourceforge.net/project/gnuplot/gnuplot/6.0.4/gnuplot-6.0.4.tar.gz"
-  sha256 "458d94769625e73d5f6232500f49cbadcb2b183380d43d2266a0f9701aeb9c5b"
+  url "https://downloads.sourceforge.net/project/gnuplot/gnuplot/6.0.5/gnuplot-6.0.5.tar.gz"
+  sha256 "73237f37f03306d68bfae133a9a50d5e9341384e198d5ab37eeca9ab534deed8"
   license "gnuplot"
+  compatibility_version 1
 
   livecheck do
     url :stable
@@ -11,12 +12,12 @@ class Gnuplot < Formula
   end
 
   bottle do
-    sha256 arm64_tahoe:   "84aa92c8f37df3670debec51a5f814b8012ee27805e179d4928cf4c6348c07c6"
-    sha256 arm64_sequoia: "6786833abaf3ace2b368b7a71039b4dc3ac19143c7a68811949293cc635b2c20"
-    sha256 arm64_sonoma:  "2c4cfbe7ed0015117c8749940eebe26d9ed1c44eda5db3fc195ef23a2d7b0db8"
-    sha256 sonoma:        "dcbbb1ba4a60c36591d13df4ee978f7a548b40e4e18c809e9b6be821a9a9ba36"
-    sha256 arm64_linux:   "9ed032636aabdeb38b89739653f18f4f87e9f36b5664051c2502ca62044b39f2"
-    sha256 x86_64_linux:  "3c9c387f8b3c2db2e20783ac054fd384b8233f9447d34e39e7b8e9e520b43529"
+    sha256 arm64_tahoe:   "a153d761ec3f1cdae50e78d877fd03cb4f4ecc3116e5797649d97f9b1afab4ed"
+    sha256 arm64_sequoia: "3d8efad2b1ce4cd0c1b450e879eb5eec1f4e0faed7d49e0c966f457d70153eb1"
+    sha256 arm64_sonoma:  "96dbce83ca48877b9ba0b150e44bde0dce1f6d4e579f0c26a38c921ebd134bb5"
+    sha256 sonoma:        "9797e19149b8cbeadce635e323996a5db07b9a8449a16c5b639ce0b5b1f8ee93"
+    sha256 arm64_linux:   "b39ea1e52915400931003a9aa108d53b852bbb7edad46be7118c0f6bdc4fc5e4"
+    sha256 x86_64_linux:  "d5d06f7e58bac89c438d57c31df65248ecc23d40b4ffad276afc30c201409917"
   end
 
   head do
@@ -50,12 +51,11 @@ class Gnuplot < Formula
   def install
     args = %W[
       --disable-silent-rules
-      --with-readline=#{Formula["readline"].opt_prefix}
+      --with-readline=#{formula_opt_prefix("readline")}
       --disable-wxwidgets
       --with-qt
       --without-latex
     ]
-# --without-x
 
     ENV.append "CXXFLAGS", "-std=c++17" # needed for Qt 6
     system "./prepare" if build.head?
